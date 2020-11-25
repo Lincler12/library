@@ -18,3 +18,4 @@ function resetModalInput(){
     })
     inputNumberElement.value = '';
 }
+

@@ -43,10 +43,10 @@
                     <div class="close">&times;</div>
                     <h2 class="modal-title">Book entry</h2>
                     <form action="">
-                        <input type="text" name="" id="book-title" placeholder="Title">
-                        <input type="text" name="" id="author-name" placeholder="Author">
+                        <input type="text" name="" id="book-title" maxlength="20" placeholder="Title">
+                        <input type="text" name="" id="author-name" maxlength = "20" placeholder="Author">
 
-                        <input type="number" name="" id="page-number" placeholder="Page number">
+                        <input type="number" name="" id="page-number" min = "1" max = "20000" maxlength ="4" placeholder="Page number">
                         <div class='radio-wrapper'>
                             <p>Read?</p>
                             <input type="radio" name="read?" id="yes">

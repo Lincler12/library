@@ -178,6 +178,7 @@ input[type=text]{
     margin-bottom: 3rem;
 }
 
+
 input[type=number]{
     padding: 0.5rem;
     height: fit-content;
@@ -185,8 +186,6 @@ input[type=number]{
     
 }
 
-div.radio-no{
-}
 
 input[type=submit]{
     cursor:pointer;
