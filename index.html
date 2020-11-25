@@ -20,28 +20,53 @@
             </ul>
         </div>
         <div id="main-content">
-            <div class = "card">
-                <div class = "card-title">Hobbit</div>
-                <div class = "card-body">
-                    <div class = "author-wrapper">
-                        <span class = "author-label">Author:</span>
-                        <span class = "author-value">J.R.R. Tolkien</span>
+            <div class="card">
+                <div class="card-title">Hobbit</div>
+                <div class="card-body">
+                    <div class="author-wrapper">
+                        <span class="author-label">Author:</span>
+                        <span class="author-value">J.R.R. Tolkien</span>
                     </div>
-                    <div class = "pages-wrapper">
-                        <span class = "pages-label">Pages:</span>
-                        <span class = "pages-value">256</span>
+                    <div class="pages-wrapper">
+                        <span class="pages-label">Pages:</span>
+                        <span class="pages-value">256</span>
                     </div>
-                    <div class = "read-wrapper">
-                        <span class = "read-label">Read:</span>
-                        <span class = "read-value">Yes</span>
+                    <div class="read-wrapper">
+                        <span class="read-label">Read:</span>
+                        <span class="read-value">Yes</span>
                     </div>
                 </div>
             </div>
-            
-            
+            <button id="plus"><i class="fas fa-plus"></i></button>
+            <div id="my-modal">
+                <div id="modal-content">
+                    <div class="close">&times;</div>
+                    <h2 class="modal-title">Book entry</h2>
+                    <form action="">
+                        <input type="text" name="" id="book-title" placeholder="Title">
+                        <input type="text" name="" id="author-name" placeholder="Author">
+
+                        <input type="number" name="" id="page-number" placeholder="Page number">
+                        <div class='radio-wrapper'>
+                            <p>Read?</p>
+                            <input type="radio" name="read?" id="yes">
+                            <label for="yes">yes</label>
+                            <div class = "radio-no">
+                                <input type="radio" name="read?" id="no">
+                                <label for="no" id="no-label">no</label>
+                            </div>
+                        </div>
+
+                        <input type="submit" value="Add book">
+                    </form>
+                </div>
+            </div>
+
+
         </div>
     </div>
     <script src="logic.js"></script>
+    <script src="modal.js"></script>
 </body>
 
 </html>
