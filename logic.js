@@ -36,11 +36,6 @@ const addBookToLibrary = function () {
     return book;
 }
 
-
-
-
-
-
 const generateElements = function (id, title, author, pages, read) {
     const card = document.createElement('div');
     card.classList.add('card');
@@ -56,7 +51,7 @@ const generateElements = function (id, title, author, pages, read) {
     cardBody.classList.add('card-body');
 
     const authorWrapper = document.createElement('div');
-    authorWrapper.classList.add('author-wrapper');
+    authorWrapper.classList.add('value-wrapper');
 
     const authorLabel = document.createElement('span');
     authorLabel.classList.add('author-label');
@@ -70,7 +65,7 @@ const generateElements = function (id, title, author, pages, read) {
     authorWrapper.appendChild(authorValue);
 
     const pagesWrapper = document.createElement('div');
-    pagesWrapper.classList.add('pages-wrapper');
+    pagesWrapper.classList.add('value-wrapper');
 
     const pagesLabel = document.createElement('span');
     pagesLabel.classList.add('pages-label');
@@ -84,7 +79,7 @@ const generateElements = function (id, title, author, pages, read) {
     pagesWrapper.appendChild(pagesValue);
 
     const readWrapper = document.createElement('div');
-    readWrapper.classList.add('read-wrapper');
+    readWrapper.classList.add('value-wrapper');
 
     const readLabel = document.createElement('span');
     readLabel.classList.add('read-label');
