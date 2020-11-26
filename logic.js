@@ -1,6 +1,7 @@
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
+function Book(id, title, author, pages, read) {
+    this.id = id;
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -18,8 +19,8 @@ Book.prototype.info = function () {
     }
     return `${this.title}, ${this.author}, ${this.pages}, ${readString}`;
 }
-
-function addBookToLibrary() {
+let id = 0;
+const addBookToLibrary = function () {
     const bookTitleValue = document.getElementById('book-title').value;
     const authorNameValue = document.getElementById('author-name').value;
     const pageNumberValue = document.getElementById('page-number').value;
@@ -29,7 +30,8 @@ function addBookToLibrary() {
             readValue = element.value;
         }
     })
-    const book = new Book(bookTitleValue, authorNameValue, pageNumberValue, readValue);
+    id++
+    const book = new Book(id, bookTitleValue, authorNameValue, pageNumberValue, readValue);
     myLibrary.push(book);
     return book;
 }
@@ -38,16 +40,16 @@ function addBookToLibrary() {
 
 
 
-let id = 0;
-const generateElements = function(title, author, pages, read) {
+
+const generateElements = function (id, title, author, pages, read) {
     const card = document.createElement('div');
     card.classList.add('card');
 
-    card.id=`card-${id}`;
+    card.id = `${id}`;
 
     const cardTitle = document.createElement('div');
     cardTitle.classList.add('card-title');
-    cardTitle.id='card-title';
+    cardTitle.id = 'card-title';
     cardTitle.textContent = ` ${title}`;
 
     const cardBody = document.createElement('div');
@@ -106,39 +108,39 @@ const generateElements = function(title, author, pages, read) {
     const removeButton = document.createElement('button');
     removeButton.classList.add('remove-button');
     removeButton.classList.add("remove");
-    removeButton.dataset.cardId = `card-${id}`
+    removeButton.dataset.cardId = `${id}`
     const icon = document.createElement('span');
     icon.classList.add('fas');
     icon.classList.add('fa-minus');
     removeButton.appendChild(icon);
     cardBody.appendChild(removeButton);
-    
+
     id++;
     return card;
 }
-const addBookToContent = function(title, author, pages, read) {
+const addBookToContent = function (id, title, author, pages, read) {
     const mainContent = document.getElementById('main-content');
     const plus = document.getElementById('plus');
-    const card = generateElements(title, author, pages, read);
+    const card = generateElements(id, title, author, pages, read);
     mainContent.insertBefore(card, plus);
 }
-const populateDisplay = function(){
+const populateDisplay = function () {
     myLibrary.forEach(book => {
-        addBookToContent(book.title, book.author, book.pages, book.read);
+        addBookToContent(book.id, book.title, book.author, book.pages, book.read);
     })
 }
 populateDisplay();
 
 
-function resetModalInput(){
+function resetModalInput() {
     const inputTextElements = document.querySelectorAll('input[type="text"]');
     const inputNumberElement = document.querySelector('input[type="number"]');
-    Array.from(inputTextElements).forEach(inputTextElement =>{
+    Array.from(inputTextElements).forEach(inputTextElement => {
         inputTextElement.value = '';
     })
     inputNumberElement.value = '';
     const radioElements = document.querySelectorAll('input[type="radio"]');
-    radioElements.forEach(radioElement =>{
+    radioElements.forEach(radioElement => {
         radioElement.checked = false;
     })
 }
@@ -148,21 +150,32 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
     e.target.parentElement.parentElement.style.display = 'none';
     const book = addBookToLibrary();
-    addBookToContent(book.title, book.author, book.pages, book.read);
+    addBookToContent(book.id, book.title, book.author, book.pages, book.read);
     resetModalInput();
+    console.table(myLibrary);
 });
 
 
 document.querySelector('#main-content').addEventListener('click', (e) => {
-    if(e.target.tagName.toLowerCase() === 'span' && e.target.parentElement.classList.contains('remove')){
+    if (e.target.tagName.toLowerCase() === 'span' && e.target.parentElement.classList.contains('remove')) {
+
+        const indexToRemove = myLibrary.findIndex(book => book.id === parseInt(e.target.parentElement.parentElement.parentElement.id));
+        console.table(myLibrary);
+        if (indexToRemove > -1) {
+            myLibrary.splice(indexToRemove, 1);
+            console.table(myLibrary);
+        }
         document.getElementById(e.target.parentElement.dataset.cardId).remove();
+
     }
-    else if(e.target.classList.contains('remove')){
+    else if (e.target.classList.contains('remove')) {
+        const indexToRemove = myLibrary.findIndex(book => book.id === parseInt(e.target.parentElement.parentElement.id));
+        console.table(myLibrary);
+        if (indexToRemove > -1) {
+            myLibrary.splice(indexToRemove, 1);
+            console.table(myLibrary);
+        }
         document.getElementById(e.target.dataset.cardId).remove();
     }
 })
 
-function removeBook(e){
-    document.getElementById(e.target.dataset.cardId).remove();
-    
-}
