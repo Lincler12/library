@@ -1,17 +1,13 @@
 let myLibrary = [];
 
-let book1 = new Book('Hobbit', 'J.R.R. Tolkien', 239, 'true');
-myLibrary.push(book1);
-let book2 = new Book('Of Mice And Men', 'John Steinbeck', 25, 'true');
-myLibrary.push(book2);
-let book3 = new Book('Frankenstein', 'Mary Shelley', 25, 'true');
-myLibrary.push(book3);
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
 }
+
+Book.prototype.counter = 0;
 
 Book.prototype.info = function () {
     let readString;
@@ -39,24 +35,19 @@ function addBookToLibrary() {
 }
 
 
-myLibrary.forEach(book => {
-    addBookToContent(book.title, book.author, book.pages, book.read);
-})
 
 
-function addBookToContent(title, author, pages, read) {
-    const mainContent = document.getElementById('main-content');
-    const plus = document.getElementById('plus');
-    const card = generateElements(title, author, pages, read);
-    mainContent.insertBefore(card, plus);
-}
 
-function generateElements(title, author, pages, read) {
+let id = 0;
+const generateElements = function(title, author, pages, read) {
     const card = document.createElement('div');
     card.classList.add('card');
 
+    card.id=`card-${id}`;
+
     const cardTitle = document.createElement('div');
     cardTitle.classList.add('card-title');
+    cardTitle.id='card-title';
     cardTitle.textContent = ` ${title}`;
 
     const cardBody = document.createElement('div');
@@ -111,8 +102,33 @@ function generateElements(title, author, pages, read) {
     card.appendChild(cardTitle);
     card.appendChild(cardBody);
 
+    //remove button
+    const removeButton = document.createElement('button');
+    removeButton.classList.add('remove-button');
+    removeButton.classList.add("remove");
+    removeButton.dataset.cardId = `card-${id}`
+    const icon = document.createElement('span');
+    icon.classList.add('fas');
+    icon.classList.add('fa-minus');
+    removeButton.appendChild(icon);
+    cardBody.appendChild(removeButton);
+    
+    id++;
     return card;
 }
+const addBookToContent = function(title, author, pages, read) {
+    const mainContent = document.getElementById('main-content');
+    const plus = document.getElementById('plus');
+    const card = generateElements(title, author, pages, read);
+    mainContent.insertBefore(card, plus);
+}
+const populateDisplay = function(){
+    myLibrary.forEach(book => {
+        addBookToContent(book.title, book.author, book.pages, book.read);
+    })
+}
+populateDisplay();
+
 
 function resetModalInput(){
     const inputTextElements = document.querySelectorAll('input[type="text"]');
@@ -137,4 +153,16 @@ form.addEventListener('submit', (e) => {
 });
 
 
+document.querySelector('#main-content').addEventListener('click', (e) => {
+    if(e.target.tagName.toLowerCase() === 'span' && e.target.parentElement.classList.contains('remove')){
+        document.getElementById(e.target.parentElement.dataset.cardId).remove();
+    }
+    else if(e.target.classList.contains('remove')){
+        document.getElementById(e.target.dataset.cardId).remove();
+    }
+})
 
+function removeBook(e){
+    document.getElementById(e.target.dataset.cardId).remove();
+    
+}
