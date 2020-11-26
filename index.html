@@ -13,60 +13,43 @@
 <body>
     <div id="content-wrapper">
         <div id="nav-bar">
-            <ul>
+            <!-- <ul>
                 <li></li>
                 <li>Log in</li>
                 <li>Sign in</li>
-            </ul>
+            </ul> -->
         </div>
         <div id="main-content">
-            <div class="card">
-                <div class="card-title">Hobbit</div>
-                <div class="card-body">
-                    <div class="author-wrapper">
-                        <span class="author-label">Author:</span>
-                        <span class="author-value">J.R.R. Tolkien</span>
-                    </div>
-                    <div class="pages-wrapper">
-                        <span class="pages-label">Pages:</span>
-                        <span class="pages-value">256</span>
-                    </div>
-                    <div class="read-wrapper">
-                        <span class="read-label">Read:</span>
-                        <span class="read-value">Yes</span>
-                    </div>
-                </div>
-            </div>
+
             <button id="plus"><i class="fas fa-plus"></i></button>
             <div id="my-modal">
                 <div id="modal-content">
                     <div class="close">&times;</div>
                     <h2 class="modal-title">Book entry</h2>
                     <form action="">
-                        <input type="text" name="" id="book-title" maxlength="20" placeholder="Title">
-                        <input type="text" name="" id="author-name" maxlength = "20" placeholder="Author">
-
-                        <input type="number" name="" id="page-number" min = "1" max = "20000" maxlength ="4" placeholder="Page number">
+                        <input type="text" name="" id="book-title" maxlength="20" placeholder="Title" required>
+                        <input type="text" name="" id="author-name" maxlength="20" placeholder="Author" required>
+                        <input type="number" name="" id="page-number" min="1" max="20000" maxlength="4"
+                            placeholder="Page number">
                         <div class='radio-wrapper'>
                             <p>Read?</p>
-                            <input type="radio" name="read?" id="yes">
+                            <input type="radio" required name="read?" id="yes" value = 'yes'>
                             <label for="yes">yes</label>
-                            <div class = "radio-no">
-                                <input type="radio" name="read?" id="no">
+                            <div class="radio-no">
+                                <input type="radio" name="read?" id="no" value = 'no'>
                                 <label for="no" id="no-label">no</label>
                             </div>
                         </div>
-
-                        <input type="submit" value="Add book">
+                        <input type="submit" id="submit" value="Add book">
                     </form>
                 </div>
             </div>
-
-
         </div>
     </div>
-    <script src="logic.js"></script>
-    <script src="modal.js"></script>
+
+
 </body>
+<script src="modal.js"></script>
+<script src="logic.js"></script>
 
 </html>
