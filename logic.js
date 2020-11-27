@@ -1,4 +1,18 @@
 let myLibrary = [];
+let id = 0;
+
+
+
+
+function saveLocal() {
+    if (myLibrary === 'undefined' || myLibrary.length === 0) {
+        localStorage.removeItem('myLibrary');
+        return;
+    }
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+}
+
+document.getElementById('save').addEventListener('click', saveLocal);
 
 function Book(id, title, author, pages, read) {
     this.id = id;
@@ -21,7 +35,7 @@ Book.prototype.info = function () {
     }
     return `${this.title}, ${this.author}, ${this.pages}, ${readString}`;
 }
-let id = 0;
+
 const addBookToLibrary = function () {
     const bookTitleValue = document.getElementById('book-title').value;
     const authorNameValue = document.getElementById('author-name').value;
@@ -203,3 +217,19 @@ document.querySelector('#main-content').addEventListener('click', (e) => {
     }
 })
 
+
+
+function populateDisplayFromDB() {
+    if (!localStorage.getItem('myLibrary')) {
+        return;
+    }
+    lib = JSON.parse(localStorage.getItem('myLibrary'));
+    lib.forEach(bookElement => {
+        myLibrary.push(new Book(bookElement.id, bookElement.title, bookElement.author, bookElement.pages, bookElement.read));
+    })
+    id = myLibrary[myLibrary.length - 1].id;
+    populateDisplay();
+
+}
+
+populateDisplayFromDB();
