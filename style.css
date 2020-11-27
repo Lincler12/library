@@ -15,7 +15,7 @@ body {
     min-height: 100vh;
     min-width: 100vw;
     width: 100%;
-    background-color: var(--alice-blue);
+    background-color: var(--space-cadet);
     padding-bottom: 10rem;
     overflow: auto;
 }
@@ -30,7 +30,7 @@ div#content-wrapper {
 div#nav-bar {
     width: 100%;
     height: 50px;
-    background-color: var(--space-cadet);
+    background-color: var(--imperial-red);
 }
 
 div#nav-bar ul {
@@ -121,13 +121,21 @@ div.card-body div:not(:last-child) {
 
 
 button#plus {
-    color: var(--space-cadet);
+    color: var(--alice-blue);
+    background-color: transparent;
+    width: 300px;
+    height: 350px;
+    border-radius: 5px;
+    background-color: var(--manatee);
+    filter: opacity(0.2);
     font-size: 4rem;
     cursor: pointer;
+    transition: transform 0.4s;
 }
 
 button#plus:hover {
-    font-size: 4.5rem;
+    transform: scale(1.05);
+    filter:opacity(0.5);
 }
 
 div#my-modal {
@@ -206,6 +214,10 @@ input[type=text] {
     font-size: medium;
     margin-bottom: 5rem;
     /* border-radius: 5px; */
+    background-color: transparent;
+    border-bottom: 1px solid var(--alice-blue);
+    caret-color: var(--alice-blue);
+    color:var(--alice-blue);
 }
 
 input[type=number] {
@@ -213,6 +225,10 @@ input[type=number] {
     font-size: medium;
     height: fit-content;
     margin-bottom: 5rem;
+    background-color: transparent;
+    border-bottom: 1px solid var(--alice-blue);
+    caret-color: var(--alice-blue);
+    color:var(--alice-blue);
 }
 
 input[type=submit] {
@@ -260,4 +276,25 @@ div#modal-content div.radio-wrapper {
     background-color: transparent;
     /* box-shadow: 1px 1px 2px #666666; */
     cursor: pointer;
+}
+
+.remove-button:hover{
+    filter:brightness(0.8);
+}
+
+.toggle-button{
+    cursor: pointer;
+    text-align: center;
+    margin: 0 auto;
+    height: 3.5rem;
+    width: 10rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    padding:1rem;
+    color:var(--alice-blue);
+    background-color: var(--amaranth-red);
+}
+
+.toggle-button:hover{
+    filter:brightness(0.9);
 }
