@@ -8,7 +8,9 @@ function Book(id, title, author, pages, read) {
     this.read = read;
 }
 
-Book.prototype.counter = 0;
+Book.prototype.toggleRead = function () {
+    this.read = !this.read;
+};
 
 Book.prototype.info = function () {
     let readString;
@@ -27,7 +29,9 @@ const addBookToLibrary = function () {
     let readValue;
     document.getElementsByName('read?').forEach(element => {
         if (element.checked) {
-            readValue = element.value;
+            readValue = true;
+        } else {
+            readValue = false;
         }
     })
     id++
@@ -87,7 +91,9 @@ const generateElements = function (id, title, author, pages, read) {
 
     const readValue = document.createElement('span');
     readValue.classList.add('read-value');
-    readValue.textContent = ` ${read}`;
+
+    readValue.textContent = read ? ' yes' : ' no';
+
 
     readWrapper.appendChild(readLabel);
     readWrapper.appendChild(readValue);
@@ -103,12 +109,20 @@ const generateElements = function (id, title, author, pages, read) {
     const removeButton = document.createElement('button');
     removeButton.classList.add('remove-button');
     removeButton.classList.add("remove");
-    removeButton.dataset.cardId = `${id}`
+    removeButton.dataset.cardId = `${id}`;
     const icon = document.createElement('span');
     icon.classList.add('fas');
     icon.classList.add('fa-minus');
     removeButton.appendChild(icon);
     cardBody.appendChild(removeButton);
+
+    //toggle read state
+    const toggle = document.createElement('button');
+    toggle.dataset.cardId = `${id}`;
+    toggle.dataset.button = 'toggle';
+    toggle.classList.add('toggle-button');
+    toggle.textContent = 'Read';
+    cardBody.appendChild(toggle);
 
     id++;
     return card;
@@ -147,30 +161,45 @@ form.addEventListener('submit', (e) => {
     const book = addBookToLibrary();
     addBookToContent(book.id, book.title, book.author, book.pages, book.read);
     resetModalInput();
-    console.table(myLibrary);
 });
 
-
+//content is dynamically generated so we need to check what is clicked on screen (event delegation)
 document.querySelector('#main-content').addEventListener('click', (e) => {
     if (e.target.tagName.toLowerCase() === 'span' && e.target.parentElement.classList.contains('remove')) {
 
         const indexToRemove = myLibrary.findIndex(book => book.id === parseInt(e.target.parentElement.parentElement.parentElement.id));
-        console.table(myLibrary);
+
         if (indexToRemove > -1) {
             myLibrary.splice(indexToRemove, 1);
-            console.table(myLibrary);
+
         }
         document.getElementById(e.target.parentElement.dataset.cardId).remove();
 
     }
     else if (e.target.classList.contains('remove')) {
         const indexToRemove = myLibrary.findIndex(book => book.id === parseInt(e.target.parentElement.parentElement.id));
-        console.table(myLibrary);
+
         if (indexToRemove > -1) {
             myLibrary.splice(indexToRemove, 1);
-            console.table(myLibrary);
+
         }
         document.getElementById(e.target.dataset.cardId).remove();
+    }
+
+    if (e.target.dataset.button === 'toggle') { //when toggle button is clicked
+        const cardElement = document.getElementById(`${e.target.dataset.cardId}`);
+        const readValue = cardElement.querySelector('.read-value');
+        if (readValue.textContent.toLowerCase().trim() === 'yes') {
+            readValue.textContent = 'no';
+        } else {
+            readValue.textContent = 'yes';
+        }
+        myLibrary.map(book => {
+            if (book.id === parseInt(cardElement.id)) {
+                book.toggleRead();
+            }
+        })
+
     }
 })
 
