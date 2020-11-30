@@ -14,27 +14,29 @@ function saveLocal() {
 
 document.getElementById('save').addEventListener('click', saveLocal);
 
-function Book(id, title, author, pages, read) {
-    this.id = id;
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
-
-Book.prototype.toggleRead = function () {
-    this.read = !this.read;
-};
-
-Book.prototype.info = function () {
-    let readString;
-    if (this.read === true) {
-        readString = 'read';
-    } else {
-        readString = 'not read yet';
+class Book {
+    constructor(id, title, author, pages, read) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
     }
-    return `${this.title}, ${this.author}, ${this.pages}, ${readString}`;
+    info() {
+        let readString;
+        if (this.read === true) {
+            readString = 'read';
+        } else {
+            readString = 'not read yet';
+        }
+        return `${this.title}, ${this.author}, ${this.pages}, ${readString}`;
+    }
+
+    toggleRead() {
+        this.read = !this.read;
+    }
 }
+
 
 const addBookToLibrary = function () {
     const bookTitleValue = document.getElementById('book-title').value;
@@ -189,8 +191,7 @@ document.querySelector('#main-content').addEventListener('click', (e) => {
         }
         document.getElementById(e.target.parentElement.dataset.cardId).remove();
 
-    }
-    else if (e.target.classList.contains('remove')) {
+    } else if (e.target.classList.contains('remove')) {
         const indexToRemove = myLibrary.findIndex(book => book.id === parseInt(e.target.parentElement.parentElement.id));
 
         if (indexToRemove > -1) {
