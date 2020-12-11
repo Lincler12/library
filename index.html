@@ -1,53 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="content-wrapper">
-        <div id="nav-bar">
-            <div id="save-wrapper">
-                <button id="save">Save local</button>
-            </div>
+      <div id="nav-bar">
+        <div id="save-wrapper">
+          <button id="save">Save local</button>
         </div>
-        <div id="main-content">
-
-            <button id="plus"><i class="fas fa-plus"></i></button>
-            <div id="my-modal">
-                <div id="modal-content">
-                    <div class="close">&times;</div>
-                    <h2 class="modal-title">Book entry</h2>
-                    <form action="">
-                        <input type="text" name="" id="book-title" maxlength="20" placeholder="Title" required>
-                        <input type="text" name="" id="author-name" maxlength="20" placeholder="Author" required>
-                        <input type="number" name="" id="page-number" min="1" max="20000" maxlength="4"
-                            placeholder="Page number">
-                        <div class='radio-wrapper'>
-                            <p>Read?</p>
-                            <input type="radio" required name="read?" id="yes" value='yes'>
-                            <label for="yes">yes</label>
-                            <div class="radio-no">
-                                <input type="radio" name="read?" id="no" value='no'>
-                                <label for="no" id="no-label">no</label>
-                            </div>
-                        </div>
-                        <input type="submit" id="submit" value="Add book">
-                    </form>
+      </div>
+      <div id="main-content">
+        <button id="plus"><i class="fas fa-plus"></i></button>
+        <div id="my-modal">
+          <div id="modal-content">
+            <div class="close">&times;</div>
+            <h2 class="modal-title">Book entry</h2>
+            <form action="">
+              <input
+                type="text"
+                name=""
+                autocomplete="off"
+                id="book-title"
+                maxlength="20"
+                placeholder="Title"
+                required
+              />
+              <input
+                type="text"
+                name=""
+                autocomplete="off"
+                id="author-name"
+                maxlength="20"
+                placeholder="Author"
+                required
+              />
+              <input
+                type="number"
+                name=""
+                autocomplete="off"
+                id="page-number"
+                min="1"
+                max="20000"
+                maxlength="4"
+                placeholder="Page number"
+                required
+              />
+              <div class="radio-wrapper">
+                <p>Read?</p>
+                <input
+                  type="radio"
+                  required
+                  name="read?"
+                  id="yes"
+                  value="yes"
+                />
+                <label for="yes">yes</label>
+                <div class="radio-no">
+                  <input type="radio" name="read?" id="no" value="no" />
+                  <label for="no" id="no-label">no</label>
                 </div>
-            </div>
+              </div>
+              <input type="submit" id="submit" value="Add book" />
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-
-
-</body>
-<script src="modal.js"></script>
-<script src="logic.js"></script>
-
+  </body>
+  <script src="modal.js"></script>
+  <script src="logic.js"></script>
 </html>
